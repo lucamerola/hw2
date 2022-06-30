@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "PlayfairDisplay";
+    src: url("../font/PlayfairDisplay-Bold.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "Corinthia-Regular";
+    src: url("../font/Corinthia-Regular.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "ZillaSlabHighlight-Regular";
+    src: url("../font/ZillaSlabHighlight-Regular.ttf") format('truetype');
+}
