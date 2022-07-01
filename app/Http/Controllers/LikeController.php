@@ -49,6 +49,25 @@ class LikeController extends BaseController{
         }
         #altrimenti se non è presente il drink
         #gli metto il like
+        /*
+            ma prima controllo che esista il drink
+            perchè un utente può inserire il drink dal url, e mettere numeri a caso
+        */
+        $url="https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=".$id_cocktail;
+        $json = Http::get($url);
+        if ($json->failed()){
+            $response['error']=true;
+            $response['errorType']="Http::get Error mettiTogliLike";
+            return response()->json($response);
+        }
+        $drink = json_decode($json, 1);
+        $drink=$drink['drinks'];
+        if($drink === null){
+            $response['error']=true;
+            $response['errorType']="Non esiste un cocktail con quel id";
+            return response()->json($response);
+        }
+        #se invece non è null, cioè se esiste il cocktail, allora lo inserisco nel db
         $newLike = Likes::create([
             'cod_utente' => Session::get('user_id'),
             'cod_drink' => $id_cocktail

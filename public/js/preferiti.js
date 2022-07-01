@@ -1,9 +1,21 @@
 function onResponseJSON(response){
+    if(response.status == 500){
+        // questo è un errore riferito al collegamento col mio server apache
+        return JSON.parse('{"error":true}');
+    }
     return response.json();
 }
 
 
 function onJSON(json){
+    /* 
+    questo è un errore dovuto o dal mancato collegamento tra il client e il server apache
+    o dal mancato collegamento tra server apache e il server dove prendo i drink
+    */
+    if("error" in json){
+        console.log(json);
+        return;
+    }
     const lista_cocktail_preferiti = document.getElementById("lista-cocktail-preferiti");
     lista_cocktail_preferiti.innerHTML="";
     for(drink of json){

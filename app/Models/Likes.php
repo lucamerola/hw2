@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Likes extends Model{
+class Likes extends Eloquent{
 
-    protected $table = 'like_drink';
-    public $timestamps = false;
+    protected $connection = 'mongodb';
+    protected $collection = 'like_drink';
+
+    //protected $table = 'like_drink';
+    //public $timestamps = false;
 
     protected $fillable = [
         'cod_utente',

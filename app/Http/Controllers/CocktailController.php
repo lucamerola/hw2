@@ -16,8 +16,11 @@ class CocktailController extends BaseController{
     public function openingCocktail(){
         $url="https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail";
         $json = Http::get($url);
-        if ($json->failed()) abort(500);
-
+        if ($json->failed()){
+            $response['error']=true;
+            $response['errorType']="Http::get Error OpeningCocktail";
+            return response()->json($response);
+        } 
         $list_drinks_API = json_decode($json, 1);
         $list_drinks_API=$list_drinks_API['drinks'];
         $my_drinks_List=array();
@@ -59,7 +62,11 @@ class CocktailController extends BaseController{
         }
         $url="https://www.thecocktaildb.com/api/json/v1/1/search.php?f=".$filtro[0];
         $json = Http::get($url);
-        if ($json->failed()) abort(500);
+        if ($json->failed()){
+            $response['error']=true;
+            $response['errorType']="Http::get Error Search";
+            return response()->json($response);
+        }
         $list_cocktail_to_filter=array();
         $list_drinks_API = json_decode($json, 1);
         $list_drinks_API=$list_drinks_API['drinks'];
