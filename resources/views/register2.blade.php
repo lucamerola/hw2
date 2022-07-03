@@ -28,22 +28,22 @@
                     <form name="form-registrazione" method="post">
                         @csrf
                         <p>
-                            <label>Nome <input type="text" name='nome' value="{{ old("nome") }}"></label>
+                            <input type="text" name='nome' placeholder='Nome' value="{{ old("nome") }}">
                         </p>
                         <p>
-                            <label>Cognome <input type="text" name='cognome' value="{{ old("cognome") }}"></label>
+                            <input type="text" name='cognome' placeholder='Cognome' value="{{ old("cognome") }}">
                         </p>
                         <p>
-                            <label>E-mail <input type="text" name='email' value="{{ old("email") }}"></label>
+                            <input type="text" name='email' placeholder='Email' value="{{ old("email") }}">
                         </p>
                         <p>
-                            <label>Password <input type="password" name='password' value="{{ old("password") }}"></label>
+                            <input type="password" name='password' placeholder='Password' value="{{ old("password") }}">
                         </p>
                         <p>
-                            <label>Ripeti Password <input type="password" name='ripetiPassword'></label>
+                            <input type="password" name='ripetiPassword' placeholder='Ripeti password'>
                         </p>
                         <p>
-                            <label>&nbsp <input type="submit"></label>
+                            <label>&nbsp <input class='btn-registrazione' type="submit"></label>
                         </p>
                     </form>
                 </div>

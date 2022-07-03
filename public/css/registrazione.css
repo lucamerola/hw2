@@ -12,19 +12,51 @@ article{
     margin-top: 10%;
 }
 
+h2, .error{
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .error{
     color: red;
 }
+
+input{
+    height: 12%;
+    border: 1px solid #dddfe2;
+    color: #1d2129;
+    padding: 0 8px;
+    margin: 0;
+    outline: none;
+}
+
+.btn-registrazione{
+    height: auto;
+    background-color: #0e3b6b;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    padding: 0 16px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
 .navigate{
-    font-size: 1.5vw;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.3vw;
     margin: 0;
     color: #0e3b6b;
 }
 .navigate:hover{ 
-    color: #495a6d;
+    color: #526274;
 } 
+
 @media(max-width: 650px) {
     article{
         margin-top: 20%;
+    }
+}
+@media(max-width: 720px){
+    .navigate{
+        font-size: 90%;
     }
 }

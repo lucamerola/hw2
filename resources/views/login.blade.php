@@ -26,13 +26,13 @@
                 <form name="form-accesso" method="post">
                     @csrf
                     <p>
-                        <label>E-mail <input type="text" name='email' value="{{ old("email") }}"></label>
+                        <input type="text" name='email' placeholder='Email' value="{{ old("email") }}">
                     </p>
                     <p>
-                        <label>Password <input type="password" name='password'></label>
+                        <input type="password" name='password' placeholder='password'>
                     </p>
                     <p>
-                        <label>&nbsp <input type="submit"></label>
+                        <label>&nbsp <input class='btn-login' type="submit"></label>
                     </p>
                 </form>
             </div>
