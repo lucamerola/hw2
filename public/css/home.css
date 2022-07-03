@@ -76,6 +76,15 @@ section{
     margin-left: 3%;
 }
 
+#ricerca{
+    height: 25px;
+    border: 1px solid #dddfe2;
+    color: #1d2129;
+    padding: 0 8px;
+    margin: 0;
+    outline: none;
+}
+
 
 #lista-cocktail{
     flex-direction: row;

@@ -28,7 +28,7 @@
         </header>
         <section>
             <div id="div-ricerca">
-                <label>Ricerca <input type="text" id='ricerca'></label>
+                <label>Ricerca: <input type="text" placeholder='Nome cocktail' id='ricerca'></label>
             </div>
             <div id="lista-cocktail-ricercati" class="hidden">
 
