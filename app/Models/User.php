@@ -51,4 +51,7 @@ class User extends Model
     public function likes(){
         return $this->belongsToMany("App/Models/Likes");
     }
+    public function reviews(){
+        return $this->hasMany("App/Models/Review");
+    }
 }

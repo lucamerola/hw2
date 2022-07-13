@@ -28,6 +28,11 @@ function onJSON(json){
         div_scheda.classList="scheda";
         div_scheda.dataset.cardDrink=drink.strDrink.replace(" ","_");
         div_scheda.dataset.cardId=drink.idDrink;
+        div_scheda.addEventListener('click', function(event){
+            let idDrink = event.currentTarget.dataset.cardId;
+            //console.log(idDrink);
+            window.location.href="/cocktail/"+idDrink;
+        });
         let div_like = document.createElement('div');
         div_like.classList="div-like";
         let img_like = document.createElement('img');

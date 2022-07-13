@@ -24,6 +24,11 @@ function onJSON(json){
         div_scheda.classList="scheda";
         div_scheda.dataset.cardDrink=drink.strDrink.replace(" ","_");
         div_scheda.dataset.cardId=drink.idDrink;
+        div_scheda.addEventListener('click', function(event){
+            let idDrink = event.currentTarget.dataset.cardId;
+            //console.log(idDrink);
+            window.location.href=window.location.href+"cocktail/"+idDrink;
+        });
         let div_like = document.createElement('div');
         div_like.classList="div-like";
         let img_like = document.createElement('img');
@@ -37,6 +42,7 @@ function onJSON(json){
         }else{
             img_like.src="/img/dislike.png";
         }
+        let conteggioLike = document.createElement('h1');
        /* if(drink.like!==undefined && drink.like===true){
             
         }*/
@@ -51,6 +57,10 @@ function onJSON(json){
 
         div_titolo_scheda.appendChild(h4);
         div_like.appendChild(img_like);
+        if(drink.conteggioLike>0){
+            conteggioLike.innerText=drink.conteggioLike;
+        }
+        div_like.appendChild(conteggioLike);
         div_scheda.appendChild(div_titolo_scheda);
         div_scheda.appendChild(img);
         div_scheda.appendChild(div_like);
@@ -67,23 +77,44 @@ Struttura di ogni scheda cocktail
     <img class="img-scheda" src="" alt="">
     <div class="div-like">
         <img class="img-like" src="" alt="">
+        <h2 ></h2>
     </div>
 </div>
 */
 
 function onJSON_Like(json){
+    // questo in genere avviene quando non sono loggato
+    if(json.length===0 || !("drinkId" in json)){
+        return;
+    }
+    // se ci sono stati errori dal server mostro cos'è successo
     if("error" in json){
         console.log(json.errorType);
         return;
     }
-    const div_img_like = document.querySelector("[data-card-id='"+json.drinkId+"']");
-    const img_like=div_img_like.childNodes[2].childNodes[0];
+    //se tutto è andato bene e sono loggato
+    let div_img_like = document.querySelector("[data-card-id='"+json.drinkId+"']");
+    let img_like =div_img_like.childNodes[2].childNodes[0];
+    let conteggioLike=div_img_like.childNodes[2].childNodes[1];
     if("like" in json){
         if(json.like===true){
             img_like.src="/img/like.png";
+            // primo like che riceve la scheda
+            if(conteggioLike.textContent===""){
+                conteggioLike.innerText=1;
+            }else{
+                // altrimenti incremento il conteggio dei like
+                conteggioLike.innerText=parseInt(conteggioLike.textContent)+1;
+            }
         }
         else{
             img_like.src="/img/dislike.png";
+            if(conteggioLike.textContent==="1"){
+                conteggioLike.innerText="";
+            }
+            else{
+                conteggioLike.innerText=parseInt(conteggioLike.textContent)-1;
+            }
         }
     }
 }
@@ -91,6 +122,8 @@ function onJSON_Like(json){
 function mettiTogliLike(event){
     const drink_target = event.target.parentElement.parentElement.dataset.cardId;
     fetch("mettiTogliLike/"+drink_target).then(onResponseJSON).then(onJSON_Like);
+    // per evitare l'effetto del bubbling
+    event.stopPropagation();
 }
 
 function onJSON_Filter(json){
@@ -105,6 +138,11 @@ function onJSON_Filter(json){
         div_scheda.classList="scheda";
         div_scheda.dataset.cardDrink=drink.strDrink.replace(" ","_");
         div_scheda.dataset.cardId=drink.idDrink;
+        div_scheda.addEventListener('click', function(event){
+            let idDrink = event.currentTarget.dataset.cardId;
+            //console.log(idDrink);
+            window.location.href=window.location.href+"cocktail/"+idDrink;
+        });
         let div_like = document.createElement('div');
         div_like.classList="div-like";
         let img_like = document.createElement('img');
@@ -118,6 +156,7 @@ function onJSON_Filter(json){
         }else{
             img_like.src="/img/dislike.png";
         }
+        let conteggioLike = document.createElement('h1');
         let div_titolo_scheda = document.createElement('div');
         div_titolo_scheda.classList="titolo-scheda";
         let h4 = document.createElement('h4');
@@ -129,6 +168,10 @@ function onJSON_Filter(json){
 
         div_titolo_scheda.appendChild(h4);
         div_like.appendChild(img_like);
+        if(drink.conteggioLike>0){
+            conteggioLike.innerText=drink.conteggioLike;
+        }
+        div_like.appendChild(conteggioLike);
         div_scheda.appendChild(div_titolo_scheda);
         div_scheda.appendChild(img);
         div_scheda.appendChild(div_like);

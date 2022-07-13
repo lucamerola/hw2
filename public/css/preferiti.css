@@ -110,6 +110,7 @@ section{
 }
 .img-scheda{
     width: 90%;
+    border-radius: 11px;
 }
 
 footer{

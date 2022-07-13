@@ -12,12 +12,12 @@ class LoginController extends BaseController{
     public function logout(){
         //Elimina la sessione
         Session::flush();
-        return redirect('home');
+        return redirect('/');
     }
 
     public function index(){
         if(Session::get('user_id')){
-            return redirect('home');
+            return redirect('/');
         }
         $error=Session::get('error');
         Session::forget('error');
@@ -26,13 +26,13 @@ class LoginController extends BaseController{
 
     public function login(){
         if(Session::get('user_id')){
-            return redirect('home');
+            return redirect('/');
         }
         $request = request();
         if($this->countErrors($request) == 0){
             $user = User::where('email', request('email') )->first();
             Session::put('user_id', $user->id);
-            return redirect('home');
+            return redirect('/');
         }else{
             return redirect('login')->withInput();
         }

@@ -120,12 +120,20 @@ section{
 	box-shadow: 23px 19px 15px 5px #0e3b6b17;
 }
 .div-like{
-    width: 10%;
+    width: auto;
     margin-top: 10px;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.div-like h1{
+    margin-left: 3px;
 }
 .div-like img{
-    width: 100%;
+    width: 2.5vw;
 }
 .titolo-scheda{
     font-family: "PlayfairDisplay";
@@ -136,6 +144,7 @@ section{
 }
 .img-scheda{
     width: 90%;
+    border-radius: 11px;
 }
 
 footer{
@@ -197,6 +206,12 @@ a{
     }
     #div-instagram img{
         width: 10vw;
+    }
+}
+
+@media(max-width: 780px) {
+    .div-like img{
+        width: 4.5vw;
     }
 }
 

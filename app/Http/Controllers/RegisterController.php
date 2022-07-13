@@ -12,7 +12,7 @@ class RegisterController extends BaseController{
     
     protected function register(){
         if(Session::get('user_id')){
-            return redirect('home');
+            return redirect('/');
         }
         $request = request();
         if($this->countErrors($request) == 0){
@@ -24,7 +24,7 @@ class RegisterController extends BaseController{
             ]);
             if($newUser){
                 Session::put('user_id', $newUser->id);
-                return redirect('home');
+                return redirect('/');
             }
         }
         else {
@@ -83,7 +83,7 @@ class RegisterController extends BaseController{
 
     public function index() {
         if(Session::get('user_id')){
-            return redirect('home');
+            return redirect('/');
         }
         $error=Session::get('error');
         Session::forget('error');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReviewsController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +28,17 @@ Route::get('logout', 'LoginController@logout');
 Route::get('login', 'LoginController@index');
 Route::post('login', 'LoginController@login');
 
-Route::get("home", function(){
-    return view('home');
-});
 Route::get("openingCocktail", "CocktailController@openingCocktail");
 Route::get("mettiTogliLike/{idCocktail}", "LikeController@mettiTogliLike");
 Route::get("preferiti","LikeController@index");
 Route::get("ritornaPreferiti","LikeController@ritornaPreferiti");
+Route::get("isCocktailLiked/{idCocktail}","LikeController@isCocktailLiked");
 Route::get("filtra/{filtro}","CocktailController@filtra");
+Route::get("cocktail/{idCocktail}", "CocktailController@paginaCocktail");
+Route::get("reviewsCocktail/{idCocktail}", "ReviewsController@giveReviews");
+Route::get("togliRecensione/{idRecensione}", "ReviewsController@togliRecensione");
+Route::post("aggiungiRecensione", "ReviewsController@aggiungiRecensione");
+
 
 //Route::get('register/email/{email}', 'RegisterController@checkEmail');
 

@@ -12,9 +12,35 @@ use Illuminate\Support\Facades\Session;
 
 class LikeController extends BaseController{
 
-    public function mettiTogliLike(Request $request){
+    public function isCocktailLiked(Request $request){
         if(!Session::get('user_id')){
             return json_encode([]);
+        }
+        $id_cocktail=$request->route('idCocktail');
+        #se il parametro passato non è un intero
+        if(!intval($id_cocktail)){
+            $response['value']=$id_cocktail;
+            $response['error']=true;
+            $response['errorType']="Stai inserendo qualcosa di strano";
+            return response()->json($response);
+        }
+        $likes_drink = Likes::where('cod_utente', Session::get('user_id') )->where('cod_drink', $id_cocktail)->get();
+        if(count($likes_drink)==0){
+            //vuol dire che non ho mai messo like a quel drink
+            $response['drinkId']=$id_cocktail;
+            $response['like']=false;
+            return response()->json($response);
+        }
+        else{
+            $response['drinkId']=$id_cocktail;
+            $response['like']=true;
+            return response()->json($response);
+        }
+    }
+
+    public function mettiTogliLike(Request $request){
+        if(!Session::get('user_id')){
+            return response()->json([]);
         }
         //echo Session::get('user_id');
         $id_cocktail=$request->route('idCocktail');
@@ -86,7 +112,7 @@ class LikeController extends BaseController{
 
     public function ritornaPreferiti(){
         if(!Session::get('user_id')){
-            redirect("home");
+            redirect("/");
         }
         $likes_drink = Likes::where('cod_utente', Session::get('user_id') )->get();
         $my_drink_list=array();
@@ -109,7 +135,7 @@ class LikeController extends BaseController{
 
     public function index(){
         if(!Session::get('user_id')){
-            return redirect('home');
+            return redirect('/');
         }
         return view('preferiti');
     }
